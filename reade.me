@@ -1,0 +1,1772 @@
+import pandas as pd
+
+# Dados do Time 1
+dados_time1 = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [90, 82, 79, 76, 64, 50, 0],
+    "Últimos 5 Mapas": ["V V V V V", "V V L V V", "V L V V L", "V L V V V", "L V L L V", "V L", "FB FB FB FB FB"],
+    "Vitórias CT (E)": [15, 15, 6, 10, 0, 1, 0],
+    "Vitórias T (B)": [5, 5, 4, 6, 11, 3, 44],
+    "CT % de Êxito": [57, 62, 65, 61, 58, 33, 0],
+    "T % de Êxito": [64, 62, 48, 50, 49, 56, 0],
+}
+
+# Dados do Time 2 (exemplo)
+dados_time2 = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [70, 60, 85, 40, 75, 55, 10],
+    "Últimos 5 Mapas": ["L V L V V", "V L V V L", "V V L L V", "L V L L V", "V V V V L", "L L", "FB FB"],
+    "Vitórias CT (E)": [7, 10, 8, 3, 14, 2, 0],
+    "Vitórias T (B)": [3, 4, 5, 2, 16, 3, 1],
+    "CT % de Êxito": [50, 55, 70, 45, 62, 38, 10],
+    "T % de Êxito": [60, 50, 52, 48, 58, 45, 5],
+}
+
+# Função para comparar estatísticas de dois times para um mapa
+def comparar_mapas(mapa, time1, time2):
+    print(f"\nComparando o mapa {mapa}:\n")
+    
+    # Encontrar as estatísticas do mapa para os dois times
+    stats_time1 = time1[time1['Mapa'] == mapa].iloc[0]
+    stats_time2 = time2[time2['Mapa'] == mapa].iloc[0]
+
+    # Exibir as estatísticas de cada time
+    print(f"Time 1 ({mapa}):")
+    print(stats_time1[['Mapa', 'Taxa de Vitória (%)', 'Últimos 5 Mapas', 'Vitórias CT (E)', 'Vitórias T (B)', 'CT % de Êxito', 'T % de Êxito']])
+
+    print(f"\nTime 2 ({mapa}):")
+    print(stats_time2[['Mapa', 'Taxa de Vitória (%)', 'Últimos 5 Mapas', 'Vitórias CT (E)', 'Vitórias T (B)', 'CT % de Êxito', 'T % de Êxito']])
+
+    # Comparar os dois times
+    print("\nComparação:")
+    if stats_time1['Taxa de Vitória (%)'] > stats_time2['Taxa de Vitória (%)']:
+        print(f"Time 1 tem uma melhor taxa de vitória no {mapa}.")
+    else:
+        print(f"Time 2 tem uma melhor taxa de vitória no {mapa}.")
+    
+    if stats_time1['CT % de Êxito'] > stats_time2['CT % de Êxito']:
+        print(f"Time 1 tem uma melhor performance como CT no {mapa}.")
+    else:
+        print(f"Time 2 tem uma melhor performance como CT no {mapa}.")
+    
+    if stats_time1['T % de Êxito'] > stats_time2['T % de Êxito']:
+        print(f"Time 1 tem uma melhor performance como T no {mapa}.")
+    else:
+        print(f"Time 2 tem uma melhor performance como T no {mapa}.")
+    
+    print("\n--- Fim da comparação do mapa ---")
+
+# Função para obter a entrada do usuário
+def obter_input():
+    print("Selecione os times para comparar:")
+    time1 = input("Digite o nome do Time 1: ")
+    time2 = input("Digite o nome do Time 2: ")
+
+    print(f"\nVocê escolheu comparar {time1} com {time2}.")
+    
+    # Perguntar quais mapas comparar
+    mapas = input("Digite os mapas a serem comparados (separados por vírgula, ex: Dust II, Mirage, Nuke): ").split(',')
+
+    # Limpar espaços extras
+    mapas = [mapa.strip() for mapa in mapas]
+
+    return time1, time2, mapas
+
+# Função principal
+def main():
+    time1, time2, mapas_escolhidos = obter_input()
+
+    # Criar DataFrames
+    df_time1 = pd.DataFrame(dados_time1)
+    df_time2 = pd.DataFrame(dados_time2)
+
+    # Comparar os mapas selecionados
+    for mapa in mapas_escolhidos:
+        if mapa in df_time1['Mapa'].values and mapa in df_time2['Mapa'].values:
+            comparar_mapas(mapa, df_time1, df_time2)
+        else:
+            print(f"\nO mapa {mapa} não está disponível para comparação.")
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # 4. MOUZ
+dados_MOUZ = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 5. FURIA
+dados_FURIA = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 6. Aurora
+dados_Aurora = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 7. Natus Vincere
+dados_Natus_Vincere = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 8. Falcons
+dados_Falcons = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 9. FaZe Clan
+dados_FaZe_Clan = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 10. 3DMAX
+dados_3DMAX = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 11. paiN Gaming
+dados_paiN_Gaming = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# G2 Esports
+dados_G2_Esports = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [65, 71, 33, 38, 53, 0, 58],
+    "Últimos 5 Mapas": ["V", "V", "V", "L", "L", "", ""],  # Últimos 5 Mapas
+    "Vitórias CT (E)": [11, 15, 4, 6, 6, 0, 19],  # Vitórias CT
+    "Vitórias T (B)": [6, 2, 1, 6, 6, 0, 4],  # Vitórias T
+    "CT % de Êxito": [48, 56, 54, 44, 57, 0, 64],  # CT % de Êxito
+    "T % de Êxito": [59, 55, 51, 64, 37, 0, 32],  # T % de Êxito
+}
+
+
+# 13. Astralis
+dados_Astralis = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 14. TYLOO
+dados_TYLOO = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 15. GamerLegion
+dados_GamerLegion = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 16. Team Liquid
+dados_Team_Liquid = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 17. Heroic
+dados_Heroic = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 18. Virtus.pro
+dados_Virtus_pro = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 19. Legacy
+dados_Legacy = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 20. Movistar KOI
+dados_Movistar_KOI = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 21. AMKAL ESPORTS
+dados_AMKAL_ESPORTS = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 22. SKADE
+dados_SKADE = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 23. FORZE
+dados_FORZE = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 24. Astralis Talent
+dados_Astralis_Talent = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 25. Ninjas in Pyjamas
+dados_Ninjas_in_Pyjamas = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 26. BIG
+dados_BIG = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 27. OG
+dados_OG = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 28. NAVI Junior
+dados_NAVI_Junior = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 29. Fnatic
+dados_Fnatic = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 30. Team Falcons
+dados_Team_Falcons = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 31. Complexity
+dados_Complexity = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 32. Endpoint
+dados_Endpoint = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 33. Copenhagen Flames
+dados_Copenhagen_Flames = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 34. Team Spirit Academy
+dados_Team_Spirit_Academy = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 35. BAD NEWS BEARS
+dados_BAD_NEWS_BEARS = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 36. forZe Academy
+dados_forZe_Academy = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 37. SAW
+dados_SAW = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 38. Singularity
+dados_Singularity = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 39. Copenhagen Flames Academy
+dados_Copenhagen_Flames_Academy = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 40. K23
+dados_K23 = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 41. Entropiq
+dados_Entropiq = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 42. OFFSET
+dados_OFFSET = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 43. FunPlus Phoenix
+dados_FunPlus_Phoenix = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 44. FURIA Academy
+dados_FURIA_Academy = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 45. Spirit Academy
+dados_Spirit_Academy = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 46. Virtus.pro Academy
+dados_Virtus_pro_Academy = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 47. Copenhagen Flames Junior
+dados_Copenhagen_Flames_Junior = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 48. forZe Junior
+dados_forZe_Junior = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 49. Natus Vincere Junior
+dados_Natus_Vincere_Junior = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+# 50. FaZe Clan Academy
+dados_FaZe_Clan_Academy = {
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0,0,0,0,0,0,0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0,0,0,0,0,0,0],
+    "Vitórias T (B)": [0,0,0,0,0,0,0],
+    "CT % de Êxito": [0,0,0,0,0,0,0],
+    "T % de Êxito": [0,0,0,0,0,0,0],
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 5. FURIA
+FURIA = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 6. Aurora
+Aurora = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 7. Natus Vincere
+Natus_Vincere = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 8. Falcons
+Falcons = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 9. FaZe Clan
+FaZe_Clan = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 10. 3DMAX
+DMAX = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 11. paiN Gaming
+paiN_Gaming = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 12. G2 Esports
+G2_Esports = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [65, 71, 33, 38, 53, 0, 58],
+    "Últimos 5 Mapas": ["V", "V", "V", "L", "L", "", ""],  # Últimos 5 Mapas
+    "Vitórias CT (E)": [11, 15, 4, 6, 6, 0, 19],  # Vitórias CT
+    "Vitórias T (B)": [6, 2, 1, 6, 6, 0, 4],  # Vitórias T
+    "CT % de Êxito": [48, 56, 54, 44, 57, 0, 64],  # CT % de Êxito
+    "T % de Êxito": [59, 55, 51, 64, 37, 0, 32],  # T % de Êxito
+})
+
+# 13. Astralis
+Astralis = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 14. TYLOO
+TYLOO = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 15. GamerLegion
+GamerLegion = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 16. Team Liquid
+Team_Liquid = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+    # Adicione os outros times aqui...
+
+times = {
+    "Vitality": vitality,
+    "MOUZ": MOUZ,
+    "FURIA": FURIA,
+    "Aurora": Aurora,
+    "Natus Vincere": Natus_Vincere,
+    "Falcons": Falcons,
+    "FaZe Clan": FaZe_Clan,
+    "3DMAX": DMAX,
+    "paiN Gaming": paiN_Gaming,
+    "G2 Esports": G2_Esports,
+    "Astralis": Astralis,
+    "TYLOO": TYLOO,
+    "GamerLegion": GamerLegion,
+    "Team Liquid": Team_Liquid
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from flask import Flask, request
+import pandas as pd
+
+app = Flask(__name__)
+
+# -------------------------
+# Dados dos times
+# -------------------------
+vitality = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [90, 82, 79, 76, 64, 50, 0],
+    "Últimos 5 Mapas": ["V V V V V", "V V L V V", "V L V V L", "V L V V V", "L V L L V", "L W L W L", "L W L W L"],
+    "Vitórias CT (E)": [15, 15, 6, 10, 0, 1, 0],
+    "Vitórias T (B)": [5, 5, 4, 6, 11, 3, 44],
+    "CT % de Êxito": [57, 62, 65, 61, 58, 33, 0],
+    "T % de Êxito": [64, 62, 48, 50, 49, 56, 0],
+})
+
+SPIRIT = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [61, 53, 0, 64, 74, 100, 60],
+    "Últimos 5 Mapas": ["W L L W L", "L L W L L", "L L L W L", "W L W L W", "L W L W L", "L W L W L", "L W L W L"],
+    "Vitórias CT (E)": [17, 12, 0, 17, 20, 6, 13],
+    "Vitórias T (B)": [0, 4, 0, 0, 1, 6, 0],
+    "CT % de Êxito": [60, 50, 0, 60, 57, 58, 57],
+    "T % de Êxito": [47, 51, 0, 47, 53, 75, 49],
+})
+
+THE_MONGOLZ = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [61, 53, 0, 64, 74, 100, 60],
+    "Últimos 5 Mapas": ["W L L W L", "L L W L L", "L L L W L", "W L W L W", "L W L W L", "L W L W L", "L W L W L"],
+    "Vitórias CT (E)": [17, 12, 0, 17, 20, 6, 13],
+    "Vitórias T (B)": [0, 4, 0, 0, 1, 6, 0],
+    "CT % de Êxito": [60, 50, 0, 60, 57, 58, 57],
+    "T % de Êxito": [47, 51, 0, 47, 53, 75, 49],
+})
+
+MOUZ = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [61, 53, 0, 64, 74, 100, 60],
+    "Últimos 5 Mapas": ["W L L W L", "L L W L L", "L L L W L", "W L W L W", "L W L W L", "L W L W L", "L W L W L"],
+    "Vitórias CT (E)": [17, 12, 0, 17, 20, 6, 13],
+    "Vitórias T (B)": [0, 4, 0, 0, 1, 6, 0],
+    "CT % de Êxito": [60, 50, 0, 60, 57, 58, 57],
+    "T % de Êxito": [47, 51, 0, 47, 53, 75, 49],
+})
+
+# 5. FURIA
+FURIA = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 6. Aurora
+Aurora = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 7. Natus Vincere
+Natus_Vincere = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 8. Falcons
+Falcons = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 9. FaZe Clan
+FaZe_Clan = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 10. 3DMAX
+DMAX = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 11. paiN Gaming
+paiN_Gaming = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 12. G2 Esports
+G2_Esports = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [65, 71, 33, 38, 53, 0, 58],
+    "Últimos 5 Mapas": ["V", "V", "V", "L", "L", "", ""],  # Últimos 5 Mapas
+    "Vitórias CT (E)": [11, 15, 4, 6, 6, 0, 19],  # Vitórias CT
+    "Vitórias T (B)": [6, 2, 1, 6, 6, 0, 4],  # Vitórias T
+    "CT % de Êxito": [48, 56, 54, 44, 57, 0, 64],  # CT % de Êxito
+    "T % de Êxito": [59, 55, 51, 64, 37, 0, 32],  # T % de Êxito
+})
+
+# 13. Astralis
+Astralis = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 14. TYLOO
+TYLOO = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 15. GamerLegion
+GamerLegion = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 16. Team Liquid
+Team_Liquid = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 17. Navi Jr
+Navi_Jr = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 18. Into the Breach
+Into_the_Breach = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 19. 9INE
+NineINE = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 20. EXCEL
+EXCEL = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 21. ENCE
+ENCE = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 22. BIG
+BIG = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 23. NIP
+NIP = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 24. Complexity
+Complexity = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 25. Movistar Riders
+Movistar_Riders = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 26. FURIA Academy
+FURIA_Academyd = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 27. Imperial
+Imperial = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 28. Fluxo
+Fluxo = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 29. 00 Nation
+Zerozero_Nation = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# 30. MIBR
+MIBR = pd.DataFrame({
+    "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+    "Taxa de Vitória (%)": [0, 0, 0, 0, 0, 0, 0],
+    "Últimos 5 Mapas": ["", "", "", "", "", "", ""],
+    "Vitórias CT (E)": [0, 0, 0, 0, 0, 0, 0],
+    "Vitórias T (B)": [0, 0, 0, 0, 0, 0, 0],
+    "CT % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+    "T % de Êxito": [0, 0, 0, 0, 0, 0, 0],
+})
+
+# Você pode adicionar os outros times como já fez no seu código
+# Exemplo FURIA, Aurora, etc...
+# Para simplificação, vou deixar só Vitality e MOUZ aqui
+
+times = {
+    "Vitality": vitality,
+    "MOUZ": MOUZ,
+    # Adicione os outros times aqui
+}
+
+# -------------------------
+# Função auxiliar para mostrar bolinhas
+# -------------------------
+def mostrar_bolinhas(ultimos_mapas):
+    if not ultimos_mapas or pd.isna(ultimos_mapas):
+        return ""
+    bolinhas = ""
+    for resultado in str(ultimos_mapas).split():
+        if resultado == "V":
+            bolinhas += '<span class="bolinha green-bubble">V</span>'
+        elif resultado == "L":
+            bolinhas += '<span class="bolinha red-bubble">L</span>'
+        else:
+            bolinhas += f'<span class="bolinha">{resultado}</span>'
+    return bolinhas
+
+# -------------------------
+# Rota principal
+# -------------------------
+@app.route("/", methods=["GET", "POST"])
+def index():
+    comparacoes_html = ""
+    time1_name = ""
+    time2_name = ""
+
+    if request.method == "POST":
+        time1_name = request.form.get("time1", "")
+        time2_name = request.form.get("time2", "")
+        mapas = [m.strip() for m in request.form.get("mapas", "").split(",")]
+
+        # Busca nomes de times ignorando maiúsculas/minúsculas
+        time1_key = next((k for k in times if k.lower() == time1_name.lower()), None)
+        time2_key = next((k for k in times if k.lower() == time2_name.lower()), None)
+
+        if not time1_key or not time2_key:
+            comparacoes_html += "<p class='error'>Um ou ambos os times não existem na base de dados.</p>"
+        else:
+            df_time1 = times[time1_key]
+            df_time2 = times[time2_key]
+
+            for mapa in mapas:
+                if mapa in df_time1['Mapa'].values and mapa in df_time2['Mapa'].values:
+                    stats1 = df_time1[df_time1['Mapa'] == mapa].iloc[0]
+                    stats2 = df_time2[df_time2['Mapa'] == mapa].iloc[0]
+
+                    ult1 = str(stats1['Últimos 5 Mapas'])
+                    ult2 = str(stats2['Últimos 5 Mapas'])
+
+                    melhor_vitoria = time1_key if stats1['Taxa de Vitória (%)'] > stats2['Taxa de Vitória (%)'] else time2_key
+                    melhor_ct = time1_key if stats1['CT % de Êxito'] > stats2['CT % de Êxito'] else time2_key
+                    melhor_t = time1_key if stats1['T % de Êxito'] > stats2['T % de Êxito'] else time2_key
+                    sequencia_vitoria = time1_key if ult1.count("V") > ult2.count("V") else time2_key
+
+                    chance1 = stats1['CT % de Êxito'] + stats1['T % de Êxito']
+                    chance2 = stats2['CT % de Êxito'] + stats2['T % de Êxito']
+                    mais_chance = time1_key if chance1 > chance2 else time2_key
+
+                    comparacoes_html += f"""
+                    <div class='comparacao'>
+                        <h3>{mapa}</h3>
+                        <p><strong>Melhor média de vitória:</strong> {melhor_vitoria}</p>
+                        <p><strong>Melhor média de CT:</strong> {melhor_ct}</p>
+                        <p><strong>Melhor média de T:</strong> {melhor_t}</p>
+                        <p><strong>Melhor sequência de vitórias nos últimos 5 mapas:</strong> {sequencia_vitoria}</p>
+                        <p><strong>Mais chance de vencer:</strong> {mais_chance}</p>
+
+                        <div class="time">
+                            <h4>{time1_key}</h4>
+                            <table>
+                                <tr><td>Taxa de Vitória:</td><td>{stats1['Taxa de Vitória (%)']}%</td></tr>
+                                <tr><td>Últimos 5 Mapas:</td><td>{mostrar_bolinhas(stats1['Últimos 5 Mapas'])}</td></tr>
+                                <tr><td>Vitórias CT (E):</td><td>{stats1['Vitórias CT (E)']}</td></tr>
+                                <tr><td>Vitórias T (B):</td><td>{stats1['Vitórias T (B)']}</td></tr>
+                                <tr><td>CT % de Êxito:</td><td>{stats1['CT % de Êxito']}%</td></tr>
+                                <tr><td>T % de Êxito:</td><td>{stats1['T % de Êxito']}%</td></tr>
+                            </table>
+                        </div>
+
+                        <div class="time">
+                            <h4>{time2_key}</h4>
+                            <table>
+                                <tr><td>Taxa de Vitória:</td><td>{stats2['Taxa de Vitória (%)']}%</td></tr>
+                                <tr><td>Últimos 5 Mapas:</td><td>{mostrar_bolinhas(stats2['Últimos 5 Mapas'])}</td></tr>
+                                <tr><td>Vitórias CT (E):</td><td>{stats2['Vitórias CT (E)']}</td></tr>
+                                <tr><td>Vitórias T (B):</td><td>{stats2['Vitórias T (B)']}</td></tr>
+                                <tr><td>CT % de Êxito:</td><td>{stats2['CT % de Êxito']}%</td></tr>
+                                <tr><td>T % de Êxito:</td><td>{stats2['T % de Êxito']}%</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    """
+                else:
+                    comparacoes_html += f"<p class='error'>O mapa {mapa} não está disponível para comparação.</p>"
+
+    return f"""
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Comparação de Times</title>
+        <style>
+            body {{ font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }}
+            .container {{ max-width: 1000px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }}
+            h1 {{ text-align: center; color: #4CAF50; }}
+            form {{ display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }}
+            input[type="text"] {{ padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }}
+            button {{ padding: 12px; background-color: #4CAF50; color: #fff; font-size: 16px; border: none; border-radius: 5px; cursor: pointer; }}
+            button:hover {{ background-color: #45a049; }}
+            .comparacao {{ background: #f9f9f9; border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; }}
+            .comparacao h3 {{ color: #4CAF50; margin-bottom: 10px; }}
+            .time {{ margin-bottom: 15px; }}
+            table {{ width: 100%; border-collapse: collapse; margin-top: 5px; }}
+            td {{ padding: 5px 10px; border-bottom: 1px solid #ccc; }}
+            .error {{ color: red; font-weight: bold; }}
+            .bolinha {{
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                display: inline-block;
+                text-align: center;
+                line-height: 25px;
+                font-weight: bold;
+                margin-right: 5px;
+            }}
+            .green-bubble {{ background-color: #4CAF50; color: white; }}
+            .red-bubble {{ background-color: #e74c3c; color: white; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Comparar Estatísticas de Times</h1>
+            <form method="POST">
+                <label>Nome do Time 1:</label>
+                <input type="text" name="time1" value="{time1_name}" required>
+                <label>Nome do Time 2:</label>
+                <input type="text" name="time2" value="{time2_name}" required>
+                <label>Mapas para comparar (separados por vírgula):</label>
+                <input type="text" name="mapas" required>
+                <button type="submit">Comparar</button>
+            </form>
+            {comparacoes_html}
+        </div>
+    </body>
+    </html>
+    """
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
+
+
+codigo oficial funcionado aqui embaixo 
+
+
+from flask import Flask, request
+import pandas as pd
+
+app = Flask(__name__)
+
+# -------------------------
+# Dados de todos os times
+# -------------------------
+
+# Para simplificação, usaremos os mesmos dados de exemplo do seu código original
+# Só atualizei os nomes dos times para o dicionário final
+
+time_data = {
+    "Vitality": pd.DataFrame({
+        "Mapa": ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"],
+        "Taxa de Vitória (%)": [86, 82, 79, 76, 65, 50, 0],
+        "Últimos 5 Mapas": ["V V V V V", "V V V L V", "V V V L V", "V L V V L", "L V V L L", "V L", "FB FB FB FB FB"],
+        "Vitórias CT (E)": [15, 15, 6, 10, 0, 1, 0],
+        "Vitórias T (B)": [5, 5, 4, 6, 11, 3, 44],
+        "CT % de Êxito": [57, 62, 65, 61, 58, 33, 0],
+        "T % de Êxito": [64, 62, 48, 50, 49, 56, 0]
+    }),
+    "SPIRIT": pd.DataFrame({
+        "Mapa": ["Overpass", "Train", "Dust II", "Mirage", "Ancient", "Nuke", "Inferno"],
+        "Taxa de Vitória (%)": [100, 83, 81, 71, 69, 63, 0],
+        "Últimos 5 Mapas": ["V V", "V V V V L", "L V V V L", "L V L V V", "V V L L V", "V L L V V", "- - - - -"],
+        "Vitórias CT (E)": [1, 0, 14, 3, 6, 10, 0],
+        "Vitórias T (B)": [4, 15, 0, 4, 2, 3, 35],
+        "CT % de Êxito": [75, 57, 57, 61, 58, 56, 0],
+        "T % de Êxito": [73, 58, 66, 51, 49, 50, 0]
+    }),
+    "THE_MONGOLZ": pd.DataFrame({
+        "Mapa": ["Overpass", "Mirage", "Nuke", "Dust II", "Ancient", "Inferno", "Train"],
+        "Taxa de Vitória (%)": [100, 74, 64, 61, 60, 53, 0],
+        "Últimos 5 Mapas": ["V", "V V V L V", "V V L V V", "V V L L V", "V L L L V", "L L V L L", "FB FB FB FB FB"],
+        "Vitórias CT (E)": [0, 20, 0, 1, 13, 4, 0],
+        "Vitórias T (B)": [6, 1, 17, 12, 0, 1, 42],
+        "CT % de Êxito": [58, 57, 60, 50, 57, 54, 0],
+        "T % de Êxito": [75, 53, 47, 51, 49, 51, 0]
+    }),
+    "MOUZ": pd.DataFrame({
+        "Mapa": ["Train", "Nuke", "Mirage", "Ancient", "Dust II", "Inferno", "Overpass"],
+        "Taxa de Vitória (%)": [75, 68, 61, 60, 50, 46, 33],
+        "Últimos 5 Mapas": ["L V V V V", "L V L V L", "V V L L L", "FB L V V", "FB FB FB FB", "L V L L L", "L V L"],
+        "Vitórias CT (E)": [3, 17, 20, 1, 0, 5, 0],
+        "Vitórias T (B)": [6, 0, 6, 5, 22, 10, 6],
+        "CT % de Êxito": [59, 60, 60, 54, 43, 51, 32],
+        "T % de Êxito": [50, 46, 47, 49, 58, 48, 42]
+    }),
+    # Times com estatísticas vazias
+    "FURIA": pd.DataFrame({
+        "Mapa": ["Dust II", "Train", "Inferno", "Nuke", "Mirage", "Overpass", "Ancient"],
+        "Taxa de Vitória (%)": [57, 56, 55, 55, 50, 0, 0],
+        "Últimos 5 Mapas": ["V V V L L", "V V V L L", "L V V V L", "FB V V L L", "V V V V L", "", "FB FB FB FB FB"],
+        "Vitórias CT (E)": [9, 10, 2, 2, 3, 0, 0],
+        "Vitórias T (B)": [6, 3, 10, 9, 6, 0, 37],
+        "CT % de Êxito": [50, 55, 51, 54, 50, 0, 66],
+        "T % de Êxito": [56, 54, 56, 48, 47, 0, 44]
+    }),
+    "Aurora":pd.DataFrame({
+        "Mapa": ["Overpass", "Inferno", "Dust II", "Mirage", "Nuke", "Ancient", "Train"],
+        "Taxa de Vitória (%)": [100, 61, 56, 54, 50, 50, 45],
+        "Últimos 5 Mapas": ["V V", "L V L V L", "L V L V L", "L V V V L", "V B V V L", "FB FB FB FB FB", "FB FB L V L"],
+        "Vitórias CT (E)": [0, 10, 9, 8, 6, 34, 9],
+        "Vitórias T (B)": [2, 9, 22, 4, 12, 42, 9],
+        "CT % de Êxito": [100, 58, 55, 56, 57, 42, 50],
+        "T % de Êxito": [40, 48, 49, 45, 44, 56, 47]
+    }),
+    "Natus_Vincere": pd.DataFrame({
+        "Mapa": ["Train", "Inferno", "Mirage", "Dust II", "Ancient", "Nuke", "Overpass"],
+        "Taxa de Vitória (%)": [86, 63, 62, 43, 43, 30, 0],
+        "Últimos 5 Mapas": ["V V V L V", "V V L L L", "L L V V L", "FB FB FB FB FB", "V V V L L", "FB FB FB FB FB", ""],
+        "Vitórias CT (E)": [3, 5, 13, 1, 0, 2, 0],
+        "Vitórias T (B)": [7, 3, 1, 16, 6, 5, 10],
+        "CT % de Êxito": [61, 48, 49, 46, 50, 55, 0],
+        "T % de Êxito": [46, 57, 57, 47, 48, 41, 0]
+    }),
+    "Falcons": pd.DataFrame({
+        "Mapa": ["Ancient", "Mirage", "Nuke", "Dust II", "Train", "Inferno", "Overpass"],
+        "Taxa de Vitória (%)": [76, 59, 58, 50, 50, 32, 0],
+        "Últimos 5 Mapas": ["V L V V V", "L V V L L", "V L V V V", "L L L L L", "V V V L V", "L L L L L", "FB FB FB FB FB"],
+        "Vitórias CT (E)": [3, 9, 4, 13, 8, 1, 0],
+        "Vitórias T (B)": [6, 4, 4, 6, 6, 13, 7],
+        "CT % de Êxito": [54, 44, 57, 48, 56, 45, 0],
+        "T % de Êxito": [58, 56, 51, 53, 52, 47, 0]
+    }),
+    "FaZe_Clan": pd.DataFrame({
+        "Mapa": ["Ancient", "Dust II", "Inferno", "Nuke", "Train", "Mirage", "Overpass"],
+        "Taxa de Vitória (%)": [67, 56, 50, 50, 50, 47, 0],
+        "Últimos 5 Mapas": ["V V L V V", "V L V V L", "L V V L L", "FB V L V L", "FB FB FB FB FB", "V V L V V", "L L L"],
+        "Vitórias CT (E)": [8, 10, 3, 8, 0, 2, 0],
+        "Vitórias T (B)": [6, 10, 14, 7, 31, 12, 2],
+        "CT % de Êxito": [49, 52, 45, 45, 71, 49, 58],
+        "T % de Êxito": [56, 57, 53, 57, 24, 50, 20]
+    }),
+    "3DMAX": pd.DataFrame({
+        "Mapa": ["Train", "Dust II", "Inferno", "Nuke", "Ancient", "Overpass", "Mirage"],
+        "Taxa de Vitória (%)": [67, 60, 60, 44, 35, 0, 0],
+        "Últimos 5 Mapas": ["L V V V", "L V L V V", "V L V V V", "V L V V V", "V L L L V", "L L", "FB FB FB FB FB"],
+        "Vitórias CT (E)": [1, 6, 8, 4, 7, 0, 0],
+        "Vitórias T (B)": [10, 5, 2, 6, 6, 3, 31],
+        "CT % de Êxito": [58, 42, 47, 54, 53, 63, 0],
+        "T % de Êxito": [42, 56, 54, 39, 43, 14, 0]
+    }),
+    "paiN_Gaming": pd.DataFrame({
+        "Mapa": ["Nuke", "Dust II", "Inferno", "Mirage", "Ancient", "Overpass", "Train"],
+        "Taxa de Vitória (%)": [47, 38, 38, 38, 33, 0, 0],
+        "Últimos 5 Mapas": ["L V L V L", "V L V L L", "L V V L L", "L L V V", "L L L V V", "", ""],
+        "Vitórias CT (E)": [16, 3, 0, 2, 0, 0, 0],
+        "Vitórias T (B)": [3, 3, 3, 6, 18, 1, 19],
+        "CT % de Êxito": [53, 44, 44, 44, 61, 0, 35],
+        "T % de Êxito": [48, 49, 53, 49, 27, 0, 37]
+    }),
+    "G2_Esports": pd.DataFrame({
+        "Mapa": ["Inferno", "Dust II", "Ancient", "Mirage", "Nuke", "Train", "Overpass"],
+        "Taxa de Vitória (%)": [71, 67, 58, 50, 38, 33, 0],
+        "Últimos 5 Mapas": ["V L V V V", "V L V V V", "V L V V V", "L L V V L", "L V L", "L V V", ""],
+        "Vitórias CT (E)": [15, 11, 4, 6, 1, 0, 0],
+        "Vitórias T (B)": [2, 6, 1, 6, 18, 29, 6],
+        "CT % de Êxito": [56, 48, 54, 44, 57, 44, 0],
+        "T % de Êxito": [55, 59, 51, 64, 37, 32, 0]
+    }),
+    "Astralis": pd.DataFrame({
+        "Mapa": ["Nuke", "Inferno", "Ancient", "Train", "Mirage", "Overpass", "Dust II"],
+        "Taxa de Vitória (%)": [61, 60, 53, 43, 43, 33, 23],
+        "Últimos 5 Mapas": ["V L V L L", "V V V V L", "V V L L V", "L V L", "V V V L", "L L L V", "L L V L L"],
+        "Vitórias CT (E)": [11, 7, 8, 3, 0, 0, 1],
+        "Vitórias T (B)": [2, 1, 1, 11, 7, 4, 13],
+        "CT % de Êxito": [63, 54, 58, 61, 53, 33, 40],
+        "T % de Êxito": [47, 47, 50, 42, 51, 58, 46]
+    }),
+    "TYLOO": pd.DataFrame({
+        "Mapa": ["Dust II", "Ancient", "Overpass", "Nuke", "Inferno", "Train", "Mirage"],
+        "Taxa de Vitória (%)": [80, 68, 50, 47, 44, 38, 27],
+        "Últimos 5 Mapas": ["V V V L L", "V L V L L", "V L", "V L L V L", "L L V L V", "V L V L L", "L L"],
+        "Vitórias CT (E)": [0, 12, 0, 2, 7, 2, 6],
+        "Vitórias T (B)": [25, 2, 2, 3, 1, 8, 8],
+        "CT % de Êxito": [49, 58, 60, 51, 46, 53, 44],
+        "T % de Êxito": [69, 53, 42, 46, 51, 40, 46]
+    }),
+    "GamerLegion": pd.DataFrame({
+        "Mapa": ["Inferno", "Train", "Mirage", "Ancient", "Overpass", "Nuke", "Dust II"],
+        "Taxa de Vitória (%)": [67, 64, 63, 53, 50, 33, 0],
+        "Últimos 5 Mapas": ["L L L V V", "V L V V V", "V L V V L", "V V V L L", "L V L V L", "L L L V V", "L L L L L"],
+        "Vitórias CT (E)": [18, 2, 2, 2, 2, 1, 0],
+        "Vitórias T (B)": [2, 8, 3, 21, 1, 10, 38],
+        "CT % de Êxito": [49, 57, 60, 55, 56, 50, 0],
+        "T % de Êxito": [59, 50, 50, 44, 45, 45, 0]
+    }),
+    "Team_Liquid": pd.DataFrame({
+        "Mapa": ["Ancient", "Dust II", "Train", "Inferno", "Nuke", "Mirage", "Overpass"],
+        "Taxa de Vitória (%)": [46, 41, 38, 33, 27, 23, 0],
+        "Últimos 5 Mapas": ["V L L V V", "L V L V L", "V V L L L", "L V L L V", "L L V L L", "L L L V L", ""],
+        "Vitórias CT (E)": [5, 3, 2, 4, 1, 9, 0],
+        "Vitórias T (B)": [5, 5, 15, 9, 12, 11, 0],
+        "CT % de Êxito": [44, 48, 56, 42, 44, 50, 0],
+        "T % de Êxito": [48, 46, 38, 46, 44, 42, 0]
+            }),
+    "OG": pd.DataFrame({
+        "Mapa": ["Overpass", "Nuke", "Ancient", "Mirage", "Dust II", "Inferno", "Train"],
+        "Taxa de Vitória (%)": [100, 77, 68, 46, 45, 43, 38],
+        "Últimos 5 Mapas": ["V V", "V V V V L", "L V V V V", "V L V L L", "", "V L V V V", "V L V L L"],
+        "Vitórias CT (E)": [0, 7, 19, 1, 0, 1, 2],
+        "Vitórias T (B)": [3, 1, 2, 13, 19, 7, 25],
+        "CT % de Êxito": [79, 57, 58, 54, 42, 48, 48],
+        "T % de Êxito": [54, 55, 52, 44, 52, 42, 42]
+    }),
+    "n": pd.DataFrame({
+        "Mapa": ["Train", "Nuke", "Mirage", "Ancient", "Dust II", "Inferno", "Overpass"],
+        "Taxa de Vitória (%)": [75, 68, 61, 60, 50, 46, 33],
+        "Últimos 5 Mapas": ["L V V V V", "L V L V L", "V V L L L", "FB L V V", "FB FB FB FB", "L V L L L", "L V L"],
+        "Vitórias CT (E)": [3, 17, 20, 1, 0, 5, 0],
+        "Vitórias T (B)": [6, 0, 6, 5, 22, 10, 6],
+        "CT % de Êxito": [59, 60, 60, 54, 43, 51, 32],
+        "T % de Êxito": [50, 46, 47, 49, 58, 48, 42]
+    }),
+    "n tem": pd.DataFrame({
+        "Mapa": ["Train", "Nuke", "Mirage", "Ancient", "Dust II", "Inferno", "Overpass"],
+        "Taxa de Vitória (%)": [75, 68, 61, 60, 50, 46, 33],
+        "Últimos 5 Mapas": ["L V V V V", "L V L V L", "V V L L L", "FB L V V", "FB FB FB FB", "L V L L L", "L V L"],
+        "Vitórias CT (E)": [3, 17, 20, 1, 0, 5, 0],
+        "Vitórias T (B)": [6, 0, 6, 5, 22, 10, 6],
+        "CT % de Êxito": [59, 60, 60, 54, 43, 51, 32],
+        "T % de Êxito": [50, 46, 47, 49, 58, 48, 42]
+    }),
+    "9z": pd.DataFrame({
+        "Mapa": ["Train", "Dust II", "Nuke", "Ancient", "Inferno", "Mirage", "Overpass"],
+        "Taxa de Vitória (%)": [86, 67, 65, 62, 58, 33, 0],
+        "Últimos 5 Mapas": ["V V V V V", "V V L V L", "L V L V L", "V L L V", "L L V L V", "", ""],
+        "Vitórias CT (E)": [0, 8, 10, 3, 2, 0, 0],
+        "Vitórias T (B)": [6, 0, 1, 1, 6, 15, 9],
+        "CT % de Êxito": [66, 63, 57, 51, 50, 60, 0],
+        "T % de Êxito": [41, 55, 54, 51, 55, 45, 0]
+    }),
+}
+
+mapas_disponiveis = ["Dust II", "Inferno", "Train", "Nuke", "Mirage", "Overpass", "Ancient"]
+
+# -------------------------
+# Função auxiliar para bolinhas
+# -------------------------
+def mostrar_bolinhas(ultimos_mapas):
+    if not ultimos_mapas or pd.isna(ultimos_mapas):
+        return ""
+    bolinhas = ""
+    for resultado in str(ultimos_mapas).split():
+        if resultado == "V":
+            bolinhas += '<span class="bolinha green-bubble">V</span>'
+        elif resultado == "L":
+            bolinhas += '<span class="bolinha red-bubble">L</span>'
+        else:
+            bolinhas += f'<span class="bolinha">{resultado}</span>'
+    return bolinhas
+
+def calcular_pontuacao(stats, mapa):
+    # Pesos diferentes para cada mapa
+    pesos_mapas = {
+        "Inferno": {"ct": 0.35, "t": 0.30},
+        "Nuke": {"ct": 0.40, "t": 0.25},
+        "Mirage": {"ct": 0.30, "t": 0.30},
+        "Overpass": {"ct": 0.35, "t": 0.25},
+        "Ancient": {"ct": 0.35, "t": 0.25},
+        "Dust II": {"ct": 0.25, "t": 0.35},
+        "Train": {"ct": 0.35, "t": 0.25},
+    }
+
+    peso_ct = pesos_mapas.get(mapa, {"ct": 0.3, "t": 0.3})["ct"]
+    peso_t = pesos_mapas.get(mapa, {"ct": 0.3, "t": 0.3})["t"]
+
+    # Sequência de vitórias recentes
+    ultimos = str(stats["Últimos 5 Mapas"]).split()
+    peso_recente = 0
+    for i, r in enumerate(reversed(ultimos)):  # últimas partidas valem mais
+        if r == "V":
+            peso_recente += (i + 1)
+
+    # Quantidade de jogos aumenta a confiança
+    jogos = stats["Vitórias CT (E)"] + stats["Vitórias T (B)"]
+    fator_amostra = 1 + (jogos / 20)
+
+    # Fórmula final
+    pontuacao = (
+        0.4 * stats["Taxa de Vitória (%)"] +
+        peso_ct * stats["CT % de Êxito"] +
+        peso_t * stats["T % de Êxito"] +
+        2 * peso_recente
+    ) * fator_amostra
+
+    return pontuacao
+
+
+# -------------------------
+# Função de pontuação ponderada
+# -------------------------
+def pontuacao_ponderada(stats):
+    ult_vitorias = str(stats['Últimos 5 Mapas']).count("V")
+    sequencia = (ult_vitorias / 5) * 100  # normaliza 0-100
+    pontuacao = (
+        0.4 * stats['Taxa de Vitória (%)'] +
+        0.25 * stats['CT % de Êxito'] +
+        0.25 * stats['T % de Êxito'] +
+        0.1 * sequencia
+    )
+    return pontuacao
+
+# -------------------------
+# Rota principal
+# -------------------------
+@app.route("/", methods=["GET", "POST"])
+def index():
+    comparacoes_html = ""
+    time1_name = ""
+    time2_name = ""
+    mapas_selecionados = []
+
+    if request.method == "POST":
+        time1_name = request.form.get("time1", "")
+        time2_name = request.form.get("time2", "")
+        mapas_selecionados = request.form.getlist("mapas")
+
+        time1_key = next((k for k in time_data if k.lower() == time1_name.lower()), None)
+        time2_key = next((k for k in time_data if k.lower() == time2_name.lower()), None)
+
+        if not time1_key or not time2_key:
+            comparacoes_html += "<p class='error'>Um ou ambos os times não existem na base de dados.</p>"
+        else:
+            df_time1 = time_data[time1_key]
+            df_time2 = time_data[time2_key]
+
+            for mapa in mapas_selecionados:
+                if mapa in df_time1['Mapa'].values and mapa in df_time2['Mapa'].values:
+                    stats1 = df_time1[df_time1['Mapa'] == mapa].iloc[0]
+                    stats2 = df_time2[df_time2['Mapa'] == mapa].iloc[0]
+
+                    ult1 = str(stats1['Últimos 5 Mapas'])
+                    ult2 = str(stats2['Últimos 5 Mapas'])
+
+                    melhor_vitoria = time1_key if stats1['Taxa de Vitória (%)'] > stats2['Taxa de Vitória (%)'] else time2_key
+                    melhor_ct = time1_key if stats1['CT % de Êxito'] > stats2['CT % de Êxito'] else time2_key
+                    melhor_t = time1_key if stats1['T % de Êxito'] > stats2['T % de Êxito'] else time2_key
+                    sequencia_vitoria = time1_key if ult1.count("V") > ult2.count("V") else time2_key
+
+                    chance1 = stats1['CT % de Êxito'] + stats1['T % de Êxito']
+                    chance2 = stats2['CT % de Êxito'] + stats2['T % de Êxito']
+                    mais_chance = time1_key if chance1 > chance2 else time2_key
+
+                    comparacoes_html += f"""
+                    <div class='comparacao'>
+                        <h3>{mapa}</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card victory">
+                                <i class="fas fa-trophy"></i>
+                                <p>Melhor média de vitória</p>
+                                <span>{melhor_vitoria}</span>
+                            </div>
+                            <div class="stat-card ct">
+                                <i class="fas fa-shield-alt"></i>
+                                <p>Melhor média de CT</p>
+                                <span>{melhor_ct}</span>
+                            </div>
+                            <div class="stat-card t">
+                                <i class="fas fa-bomb"></i>
+                                <p>Melhor média de T</p>
+                                <span>{melhor_t}</span>
+                            </div>
+                            <div class="stat-card streak">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Sequência de vitórias</p>
+                                <span>{sequencia_vitoria}</span>
+                            </div>
+                            <div class="stat-card chance">
+                                <i class="fas fa-star"></i>
+                                <p>Mais chance de vencer</p>
+                                <span>{mais_chance}</span>
+                            </div>
+                        </div>
+
+                        <div class="time">
+                            <h4>{time1_key}</h4>
+                            <table>
+                                <tr><td>Taxa de Vitória:</td><td>{stats1['Taxa de Vitória (%)']}%</td></tr>
+                                <tr><td>Últimos 5 Mapas:</td><td>{mostrar_bolinhas(stats1['Últimos 5 Mapas'])}</td></tr>
+                                <tr><td>Vitórias CT (E):</td><td>{stats1['Vitórias CT (E)']}</td></tr>
+                                <tr><td>Vitórias T (B):</td><td>{stats1['Vitórias T (B)']}</td></tr>
+                                <tr><td>CT % de Êxito:</td><td>{stats1['CT % de Êxito']}%</td></tr>
+                                <tr><td>T % de Êxito:</td><td>{stats1['T % de Êxito']}%</td></tr>
+                            </table>
+                        </div>
+
+                        <div class="time">
+                            <h4>{time2_key}</h4>
+                            <table>
+                                <tr><td>Taxa de Vitória:</td><td>{stats2['Taxa de Vitória (%)']}%</td></tr>
+                                <tr><td>Últimos 5 Mapas:</td><td>{mostrar_bolinhas(stats2['Últimos 5 Mapas'])}</td></tr>
+                                <tr><td>Vitórias CT (E):</td><td>{stats2['Vitórias CT (E)']}</td></tr>
+                                <tr><td>Vitórias T (B):</td><td>{stats2['Vitórias T (B)']}</td></tr>
+                                <tr><td>CT % de Êxito:</td><td>{stats2['CT % de Êxito']}%</td></tr>
+                                <tr><td>T % de Êxito:</td><td>{stats2['T % de Êxito']}%</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    """
+                else:
+                    comparacoes_html += f"<p class='error'>O mapa {mapa} não está disponível para comparação.</p>"
+
+    opcoes_times = "".join([f'<option value="{t}" {"selected" if t==time1_name or t==time2_name else ""}>{t}</option>' for t in time_data])
+    opcoes_mapas = "".join([f'<option value="{m}" {"selected" if m in mapas_selecionados else ""}>{m}</option>' for m in mapas_disponiveis])
+
+    return f"""
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Comparação de Times</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <style>
+            body {{ font-family: Arial, sans-serif; background: #1e272e; margin: 0; padding: 20px; }}
+            .container {{ max-width: 1100px; margin: auto; background: #2f3640; padding: 20px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.4); color: #ecf0f1; }}
+            h1 {{ text-align: center; color: #f39c12; }}
+            form {{ display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }}
+            select, button {{ padding: 10px; font-size: 16px; border-radius: 6px; border: 1px solid #444; background: #353b48; color: #fff; }}
+            button {{ background-color: #e67e22; color: #fff; border: none; cursor: pointer; font-weight: bold; }}
+            button:hover {{ background-color: #d35400; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }}
+            .comparacao {{ background: #3d3d3d; border: 1px solid #555; border-radius: 8px; padding: 20px; margin-bottom: 20px; }}
+            .comparacao h3 {{ color: #f1c40f; margin-bottom: 15px; }}
+
+            .stats-grid {{
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 15px;
+                margin: 15px 0;
+            }}
+            .stat-card {{
+                border-radius: 12px;
+                padding: 15px;
+                text-align: center;
+                font-weight: bold;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                color: #fff;
+            }}
+            .stat-card i {{
+                font-size: 28px;
+                margin-bottom: 8px;
+                display: block;
+            }}
+            .stat-card span {{
+                display: block;
+                margin-top: 8px;
+                font-size: 18px;
+                color: #f1c40f;
+            }}
+            .stat-card.victory {{ background: #27ae60; }}
+            .stat-card.ct {{ background: #2980b9; }}
+            .stat-card.t {{ background: #c0392b; }}
+            .stat-card.streak {{ background: #8e44ad; }}
+            .stat-card.chance {{ background: #f39c12; }}
+            .stat-card:hover {{ transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.6); }}
+
+            table {{ width: 100%; border-collapse: collapse; margin-top: 10px; }}
+            td {{ padding: 5px 10px; border-bottom: 1px solid #666; }}
+            .time h4 {{ margin-top: 15px; color: #3498db; }}
+            .error {{ color: red; font-weight: bold; }}
+
+            .bolinha {{
+                width: 25px; height: 25px; border-radius: 50%; display: inline-block;
+                text-align: center; line-height: 25px; font-weight: bold; margin-right: 5px;
+            }}
+            .green-bubble {{ background-color: #27ae60; color: white; }}
+            .red-bubble {{ background-color: #e74c3c; color: white; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Comparar Estatísticas de Times</h1>
+            <form method="POST">
+                <label>Nome do Time 1:</label>
+                <select id="time1" name="time1" required>
+                    {opcoes_times}
+                </select>
+                <label>Nome do Time 2:</label>
+                <select id="time2" name="time2" required>
+                    {opcoes_times}
+                </select>
+                <label>Mapas para comparar:</label>
+                <select name="mapas" multiple required>
+                    {opcoes_mapas}
+                </select>
+                <button type="submit">Comparar</button>
+            </form>
+            {comparacoes_html}
+        </div>
+    </body>
+    </html>
+    """
+
+if __name__ == "__main__":
+    app.run(debug=True)
