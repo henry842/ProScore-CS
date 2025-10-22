@@ -33,4 +33,4 @@ Aplicação web desenvolvida em **Python** com **Flask** que compara estatístic
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seuusuario/comparador-csgo.git
+   git clone https://github.com/henry842/ProScore CS.git
